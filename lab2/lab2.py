@@ -21,8 +21,7 @@ print('1)', ans1)
 # поиск по автору с ценой до 150
 author = input('2) Автор (например Rowling): ').lower()
 for b in books:
-    # b.get('Price', '0') безопасное получение значения (если 'Price' вдруг нет, вернет '0', а не вызовет ошибку KeyError)
-    raw_price = b.get('Price', '0').replace(',', '.')
+    raw_price = b['Price'].replace(',', '.')
     price = float(raw_price)
     
     if author in b['Book-Author'].lower():  # берем автора по ключу и делаем буквы строчными
