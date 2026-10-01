@@ -25,7 +25,7 @@ for b in books:
     raw_price = b.get('Price', '0').replace(',', '.')
     price = float(raw_price)
     
-    if author in b['Book-Author'].lower(): # берем автора по ключу и делаем буквы строчными
+    if author in b['Book-Author'].lower():  # берем автора по ключу и делаем буквы строчными
         if price <= 150:
             print(b['Book-Author'], '-', b['Book-Title'], f'({price} руб.)')
 
@@ -39,9 +39,8 @@ for i in range(20):
 f.close()
 print('3) result.txt готов')
 
-# Задание 4
-# minidom.parse(...) открывает XML-файл, считывает его синтаксис
-# и строит в памяти DOM дерево узлов
+
+# minidom.parse(...) открывает XML-файл считывает его синтаксис и строит в памяти DOM дерево 
 dom = minidom.parse('currency.xml')
 res = {}
 
@@ -57,3 +56,27 @@ for v in dom.getElementsByTagName('Valute'):
     res[name] = float(val.replace(',', '.'))
 
 print('4)', res)
+
+
+# ДОПЗАДАНИЕ 1
+# Издательства без повторений
+publishers = set()
+for b in books:
+    publishers.add(b['Publisher'])
+
+print('Доп 1) Уникальных издательств:', len(publishers))
+# покажем первые 10 для наглядности в консоли
+print('Примеры издательств:', list(publishers)[:10])
+
+
+# ДОПЗАДАНИЕ 2 
+# Самые популярные 20 книг
+def get_downloads(book):
+    return int(book['Downloads']) # переводим в int для правильной сортировки чисел
+
+top_20 = sorted(books, key=get_downloads, reverse=True)[:20]
+
+print('Доп 2) Топ-20 популярных книг:')
+for i in range(20):
+    book = top_20[i]
+    print(f"{i + 1}. {book['Book-Title']} (скачиваний: {book['Downloads']})")
