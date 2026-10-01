@@ -1,7 +1,7 @@
 import os
 import time
 
-# \u001b[ — CSI, 4x — цвет бэкграунда 
+# \u001b[ CSI, 4x цвет бэкграунда 
 BLUE = "\u001b[44m"
 WHITE = "\u001b[47m"
 RED = "\u001b[41m"
@@ -60,14 +60,22 @@ def sequence():
     print(f"< 0: {BLUE}{' ' * int(p_count1 // 2)}{RESET} {p_count1}% ({count1})")
     print(f"> 0: {RED}{' ' * int(p_count2 // 2)}{RESET} {p_count2}% ({count2})\n")
 
-
+# ДОПЗАДАНИЕ Первая четверть графика y = x^2
+# с подсветкой точки escape символом
 def plot():
-    for y in range(16, -1, -1):
-        line = ""
-        for x in range(-4, 5):
-            line += "* " if x**2 == y else "  "
+    print("Допзадание: Первая четверть y = x^2")
+    for y in range(9, -1, -1):
+        line = f"{y:2d} | "
+        for x in range(0, 4):
+            if x**2 == y:
+                # Рисуем точку параболы цветным маркером
+                line += f"{RED} * {RESET}"
+            else:
+                line += " . "
         print(line)
 
+    print("    " + "-" * 12)
+    print("      0  1  2  3 (x)")
 
 flag()
 pattern()
