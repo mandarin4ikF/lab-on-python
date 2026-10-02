@@ -6,27 +6,20 @@ import pygame
 
 # генерация одного блока из 5 символов
 def generate_block():
-    # берем 3 случайные заглавные буквы
-    letters = [random.choice(string.ascii_uppercase) for i in range(3)]
-    # берем 2 случайные цифры
-    digits = [random.choice(string.digits) for i in range(2)]
-
-    # объединяем буквы и цифры в один список
+    letters = [random.choice(string.ascii_uppercase) for i in range(3)] #ascii_uppercase лежат все английские заглавные буквы
+    digits = [random.choice(string.digits) for i in range(2)] # digits все цифры от 0 до 9
     block = letters + digits
 
     # перемешиваем список чтобы порядок был случайным
     random.shuffle(block)
-
     # склеиваем список в одну строку
     return "".join(block)
 
 
 # функция срабатывает при нажатии на кнопку
 def clicked():
-    # соединяем три готовых блока через дефис
     key = f"{generate_block()}-{generate_block()}-{generate_block()}"
-    # выводим получившийся ключ на экран
-    lbl_key.configure(text=key)
+    lbl_key.configure(text=key) # заменяет XXXX внутри метки на новый сгенерированный ключ
 
 
 # список цветов для анимации текста
@@ -44,7 +37,7 @@ color_index = 0
 
 # плавная смена цвета заголовка
 def animate_title():
-    global color_index
+    global color_index #глобальная функция позволяет изменять переменную color_index внутри функции
     # меняем цвет текста надписи
     lbl_title.configure(fg=colors[color_index])
     # сдвигаем индекс на следующий цвет по кругу
@@ -71,12 +64,10 @@ label_bg = tk.Label(window, image=bg_img)
 label_bg.place(x=0, y=0, relwidth=1, relheight=1)
 
 # заголовок программы
-lbl_title = tk.Label(
-    window, text="ULTIMATE KEYGEN", font=("Impact", 35), bg="black"
-)
+lbl_title = tk.Label(window, text="ULTIMATE KEYGEN", font=("Impact", 35), bg="black")
 lbl_title.place(relx=0.5, rely=0.15, anchor="center")
 
-# поле куда пишется сгенерированный ключ
+# поле куда пишем сгенерированный ключ
 lbl_key = tk.Label(
     window,
     text="XXXXX-XXXXX-XXXXX",
@@ -99,6 +90,5 @@ btn_generate.place(relx=0.5, rely=0.75, anchor="center")
 
 # запускаем переливание цветов
 animate_title()
-
-# держим окно открытым
+# оставляем окно открытым
 window.mainloop()
