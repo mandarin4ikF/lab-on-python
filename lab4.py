@@ -5,7 +5,7 @@ items = {
     "p": (15, 2),  # пистолет
     "a": (15, 2),  # боекомплект
     "m": (20, 2),  # аптечка
-    "i": (5, 1),  # ингалятор
+    "i": (5, 1),   # ингалятор
     "k": (15, 1),  # нож
     "x": (20, 3),  # топор
     "t": (25, 1),  # оберег
@@ -34,7 +34,7 @@ item_keys = list(items.keys())
 def find_best(index, current_weight, chosen_items):
     global best_score, best_combination
 
-    # если превысили вместимость рюкзака - дальше не идем
+    # если превысили вместимость рюкзака то дальше не идем
     if current_weight > MAX_CAPACITY:
         return
 
@@ -64,7 +64,6 @@ def find_best(index, current_weight, chosen_items):
     # ветка 2: не берем предмет
     find_best(index + 1, current_weight, chosen_items)
 
-
 # запускаем поиск лучшего набора
 find_best(0, 0, [])
 
@@ -73,10 +72,10 @@ find_best(0, 0, [])
 backpack_cells = []
 for key in best_combination:
     size = items[key][1]
-    for _ in range(size):
+    for i in range(size):
         backpack_cells.append(f"[{key}]")
 
-# если остались свободные ячейки - заполняем пустыми
+# если остались свободные ячейки то заполняем пустыми
 while len(backpack_cells) < MAX_CAPACITY:
     backpack_cells.append("[ ]")
 
@@ -86,7 +85,7 @@ for r in range(ROWS):
     row_slice = backpack_cells[r * COLS : (r + 1) * COLS]
     print(", ".join(row_slice))
 
-print(f"\nИтоговые очки выживания: {best_score}")
+print(f"Итоговые очки выживания: {best_score}")
 
 # проверка условия задачи
 if best_score > 0:
